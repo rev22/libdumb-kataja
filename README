@@ -1,0 +1,6 @@
+This is a special version of DUMB library.
+- Original is from http://dumb.sourceforge.net/
+- The altered version is from http://kode54.foobar2000.org/ (Foobar2000 addon)
+- This version has been cleaned up and repackaged by Katajakasa (@IRCNet)
+
+See docs/release-old.txt for earlier release notes, and docs/readme.txt for README file.

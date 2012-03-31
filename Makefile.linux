@@ -1,0 +1,142 @@
+# A simple Makefile for DUMB
+
+RELEASE_LIBNAME=libdumb.so
+DEBUG_LIBNAME=libdumbd.so
+RELEASE_LIBNAME_STATIC=libdumbs.a
+DEBUG_LIBNAME_STATIC=libdumbds.a
+
+INSTALL_LIBDIR=/usr/lib
+INSTALL_INCDIR=/usr/include
+
+CC=gcc
+RM=rm -f
+LD=ld
+MKDIR=mkdir -p
+MV=mv
+CP=cp
+AR=ar
+
+FILES := \
+    src/core/atexit.c          \
+    src/core/duhlen.c          \
+    src/core/duhtag.c          \
+    src/core/dumbfile.c        \
+    src/core/loadduh.c         \
+    src/core/makeduh.c         \
+    src/core/rawsig.c          \
+    src/core/readduh.c         \
+    src/core/register.c        \
+    src/core/rendduh.c         \
+    src/core/rendsig.c         \
+    src/core/unload.c          \
+    src/helpers/barray.c       \
+    src/helpers/blip_buf.c     \
+    src/helpers/clickrem.c     \
+    src/helpers/memfile.c      \
+    src/helpers/resample.c     \
+    src/helpers/sampbuf.c      \
+    src/helpers/silence.c      \
+    src/helpers/riff.c         \
+    src/helpers/stdfile.c      \
+    src/it/itread2.c           \
+    src/it/loadasy.c           \
+    src/it/loadokt2.c          \
+    src/it/loadriff.c          \
+    src/it/loadxm2.c           \
+    src/it/readasy.c           \
+    src/it/readoldpsm.c        \
+    src/it/readstm2.c          \
+    src/it/itrender.c          \
+    src/it/loadasy2.c          \
+    src/it/loadoldpsm.c        \
+    src/it/loadriff2.c         \
+    src/it/ptmeffect.c         \
+    src/it/readdsmf.c          \
+    src/it/readpsm.c           \
+    src/it/readxm.c            \
+    src/it/itload.c            \
+    src/it/itunload.c          \
+    src/it/loadmod.c           \
+    src/it/loadoldpsm2.c       \
+    src/it/loads3m.c           \
+    src/it/read669.c           \
+    src/it/readmod.c           \
+    src/it/readptm.c           \
+    src/it/readxm2.c           \
+    src/it/itload2.c           \
+    src/it/load669.c           \
+    src/it/loadmod2.c          \
+    src/it/loadpsm.c           \
+    src/it/loads3m2.c          \
+    src/it/read6692.c          \
+    src/it/readmod2.c          \
+    src/it/readriff.c          \
+    src/it/xmeffect.c          \
+    src/it/itmisc.c            \
+    src/it/load6692.c          \
+    src/it/loadmtm.c           \
+    src/it/loadpsm2.c          \
+    src/it/loadstm.c           \
+    src/it/readam.c            \
+    src/it/readmtm.c           \
+    src/it/reads3m.c           \
+    src/it/itorder.c           \
+    src/it/loadamf.c           \
+    src/it/loadmtm2.c          \
+    src/it/loadptm.c           \
+    src/it/loadstm2.c          \
+    src/it/readamf.c           \
+    src/it/readokt.c           \
+    src/it/reads3m2.c          \
+    src/it/itread.c            \
+    src/it/loadamf2.c          \
+    src/it/loadokt.c           \
+    src/it/loadptm2.c          \
+    src/it/loadxm.c            \
+    src/it/readamf2.c          \
+    src/it/readokt2.c          \
+    src/it/readstm.c           \
+    src/libs/itoa.c
+
+LIBDIR=lib/
+INCDIR=include/
+OBJDIR_BASE=obj/
+
+WFLAGS=-Wall -W -Wwrite-strings -Wstrict-prototypes -Wmissing-declarations -fPIC -DDUMB_DECLARE_DEPRECATED -DLINUX
+OFLAGS=-O2 -ffast-math -fomit-frame-pointer
+DBGFLAGS=-DDEBUGMODE=1 -g3
+
+CFLAGS_RELEASE=-I$(INCDIR)/dumb $(WFLAGS) $(OFLAGS)
+CFLAGS_DEBUG=-I$(INCDIR)/dumb $(WFLAGS) $(DBGFLAGS)
+LDFLAGS=-s -shared
+
+all: 
+	$(MKDIR) $(LIBDIR)
+	$(MKDIR) $(OBJDIR_BASE)
+	$(MKDIR) $(OBJDIR_BASE)/Release
+	$(MKDIR) $(OBJDIR_BASE)/Debug
+	$(CC) $(CFLAGS_RELEASE) -c $(FILES)
+	$(MV) *.o $(OBJDIR_BASE)/Release/
+	$(CC) $(CFLAGS_DEBUG) -c $(FILES)
+	$(MV) *.o $(OBJDIR_BASE)/Debug/
+	$(CC) $(LDFLAGS) -o $(LIBDIR)/$(RELEASE_LIBNAME) $(OBJDIR_BASE)/Release/*.o
+	$(CC) $(LDFLAGS) -o $(LIBDIR)/$(DEBUG_LIBNAME) $(OBJDIR_BASE)/Debug/*.o
+	$(AR) rcs $(LIBDIR)/$(RELEASE_LIBNAME_STATIC) $(OBJDIR_BASE)/Release/*.o
+	$(AR) rcs $(LIBDIR)/$(DEBUG_LIBNAME_STATIC) $(OBJDIR_BASE)/Debug/*.o
+	@echo "Make done. To install, run make install."
+
+clean:
+	$(RM) $(OBJDIR_BASE)/Release/*.o
+	$(RM) $(OBJDIR_BASE)/Debug/*.o
+	$(RM) $(LIBDIR)/*
+
+install:
+	$(CP) $(LIBDIR)/$(RELEASE_LIBNAME) $(INSTALL_LIBDIR)
+	$(CP) $(LIBDIR)/$(DEBUG_LIBNAME) $(INSTALL_LIBDIR)
+	$(CP) $(LIBDIR)/$(RELEASE_LIBNAME_STATIC) $(INSTALL_LIBDIR)
+	$(CP) $(LIBDIR)/$(DEBUG_LIBNAMEE_STATIC) $(INSTALL_LIBDIR)
+	$(MKDIR) $(INSTALL_INCDIR)/dumb
+	$(MKDIR) $(INSTALL_INCDIR)/dumb/internal
+	$(CP) $(INCDIR)/dumb/dumb.h $(INSTALL_INCDIR)/dumb
+	$(CP) $(INCDIR)/dumb/internal/blip_buf.h $(INSTALL_INCDIR)/dumb/internal/blip_buf.h
+	@echo "Install done. Link to libdumb or libdumbd to get release or debug version. Main header file is dumb/dumb.h."

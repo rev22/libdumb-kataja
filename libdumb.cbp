@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="libdumb" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="lib\libdumbd" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj\Debug\" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-Wall" />
+					<Add option="-g" />
+					<Add option="-DBUILD_DLL" />
+					<Add option="-DDEBUGMODE=1" />
+				</Compiler>
+				<Linker>
+					<Add library="user32" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="lib\libdumb" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj\Release\" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-Wall" />
+					<Add option="-DBUILD_DLL" />
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add library="user32" />
+				</Linker>
+			</Target>
+			<Environment>
+				<Variable name="LIBS" value="D:\Ohjelmointi\Libs\C++" />
+			</Environment>
+		</Build>
+		<Compiler>
+			<Add directory="$(LIBS)\include" />
+			<Add directory="include\dumb" />
+		</Compiler>
+		<Linker>
+			<Add directory="$(LIBS)\lib" />
+		</Linker>
+		<Unit filename="include\dumb.h" />
+		<Unit filename="include\internal\aldumb.h" />
+		<Unit filename="include\internal\barray.h" />
+		<Unit filename="include\internal\blip_buf.h" />
+		<Unit filename="include\internal\dumb.h" />
+		<Unit filename="include\internal\it.h" />
+		<Unit filename="include\internal\riff.h" />
+		<Unit filename="src\core\atexit.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\core\duhlen.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\core\duhtag.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\core\dumbfile.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\core\loadduh.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\core\makeduh.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\core\rawsig.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\core\readduh.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\core\register.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\core\rendduh.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\core\rendsig.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\core\unload.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\helpers\barray.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\helpers\blip_buf.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\helpers\clickrem.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\helpers\memfile.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\helpers\resample.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\helpers\riff.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\helpers\sampbuf.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\helpers\silence.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\helpers\stdfile.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\it\itload.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\it\itload2.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\it\itmisc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\it\itorder.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\it\itread.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\it\itread2.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\it\itrender.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\it\itunload.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\it\load669.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\it\load6692.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\it\loadamf.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\it\loadamf2.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\it\loadasy.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\it\loadasy2.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\it\loadmod.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\it\loadmod2.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\it\loadmtm.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\it\loadmtm2.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\it\loadokt.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\it\loadokt2.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\it\loadoldpsm.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\it\loadoldpsm2.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\it\loadpsm.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\it\loadpsm2.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\it\loadptm.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\it\loadptm2.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\it\loadriff.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\it\loadriff2.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\it\loads3m.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\it\loads3m2.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\it\loadstm.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\it\loadstm2.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\it\loadxm.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\it\loadxm2.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\it\ptmeffect.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\it\read669.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\it\read6692.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\it\readam.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\it\readamf.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\it\readamf2.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\it\readasy.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\it\readdsmf.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\it\readmod.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\it\readmod2.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\it\readmtm.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\it\readokt.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\it\readokt2.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\it\readoldpsm.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\it\readpsm.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\it\readptm.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\it\readriff.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\it\reads3m.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\it\reads3m2.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\it\readstm.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\it\readstm2.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\it\readxm.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\it\readxm2.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\it\xmeffect.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
