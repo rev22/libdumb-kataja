@@ -1,20 +1,28 @@
 # A simple Makefile for DUMB
 
-RELEASE_LIBNAME=libdumb.so
-DEBUG_LIBNAME=libdumbd.so
-RELEASE_LIBNAME_STATIC=libdumbs.a
-DEBUG_LIBNAME_STATIC=libdumbds.a
-
-INSTALL_LIBDIR=/usr/lib
-INSTALL_INCDIR=/usr/include
+VERSION=0.9.3
+SOVERSION=0
+LIBNAME=dumb
+RELEASE_LIBNAME=lib$(LIBNAME).so.$(VERSION)
+SONAME=lib$(LIBNAME).so.$(SOVERSION)
+DEVNAME=lib$(LIBNAME).so
+DEVNAMEALT=lib$(LIBNAME)-kataja.so
+# DEBUG_LIBNAME=libdumbd.so
+# RELEASE_LIBNAME_STATIC=libdumbs.a
+# DEBUG_LIBNAME_STATIC=libdumbds.a
+DESTDIR=
+INSTALL_LIBDIR=$(DESTDIR)/usr/lib
+INSTALL_INCDIR=$(DESTDIR)/usr/include
 
 CC=gcc
 RM=rm -f
 LD=ld
 MKDIR=mkdir -p
 MV=mv
-CP=cp
+CP=cp -dp
 AR=ar
+INSTALL=install
+LN=ln -s
 
 FILES := \
     src/core/atexit.c          \
@@ -119,10 +127,13 @@ all:
 	$(MV) *.o $(OBJDIR_BASE)/Release/
 	$(CC) $(CFLAGS_DEBUG) -c $(FILES)
 	$(MV) *.o $(OBJDIR_BASE)/Debug/
-	$(CC) $(LDFLAGS) -o $(LIBDIR)/$(RELEASE_LIBNAME) $(OBJDIR_BASE)/Release/*.o
-	$(CC) $(LDFLAGS) -o $(LIBDIR)/$(DEBUG_LIBNAME) $(OBJDIR_BASE)/Debug/*.o
-	$(AR) rcs $(LIBDIR)/$(RELEASE_LIBNAME_STATIC) $(OBJDIR_BASE)/Release/*.o
-	$(AR) rcs $(LIBDIR)/$(DEBUG_LIBNAME_STATIC) $(OBJDIR_BASE)/Debug/*.o
+	$(CC) $(LDFLAGS) -Wl,-soname,$(SONAME) -o $(LIBDIR)/$(RELEASE_LIBNAME) $(OBJDIR_BASE)/Release/*.o
+#	$(CC) $(LDFLAGS) -o $(LIBDIR)/$(DEBUG_LIBNAME) $(OBJDIR_BASE)/Debug/*.o
+#	$(AR) rcs $(LIBDIR)/$(RELEASE_LIBNAME_STATIC) $(OBJDIR_BASE)/Release/*.o
+#	$(AR) rcs $(LIBDIR)/$(DEBUG_LIBNAME_STATIC) $(OBJDIR_BASE)/Debug/*.o
+	$(LN) $(RELEASE_LIBNAME) lib/$(SONAME)
+	$(LN) $(RELEASE_LIBNAME) lib/$(DEVNAME)
+	$(LN) $(RELEASE_LIBNAME) lib/$(DEVNAMEALT)
 	@echo "Make done. To install, run make install."
 
 clean:
@@ -131,12 +142,18 @@ clean:
 	$(RM) $(LIBDIR)/*
 
 install:
-	$(CP) $(LIBDIR)/$(RELEASE_LIBNAME) $(INSTALL_LIBDIR)
-	$(CP) $(LIBDIR)/$(DEBUG_LIBNAME) $(INSTALL_LIBDIR)
-	$(CP) $(LIBDIR)/$(RELEASE_LIBNAME_STATIC) $(INSTALL_LIBDIR)
-	$(CP) $(LIBDIR)/$(DEBUG_LIBNAME_STATIC) $(INSTALL_LIBDIR)
+	$(MKDIR) $(INSTALL_LIBDIR)/
+	$(INSTALL) $(LIBDIR)/$(RELEASE_LIBNAME) $(INSTALL_LIBDIR)/
+	$(CP) $(LIBDIR)/$(SONAME) $(INSTALL_LIBDIR)/
+	$(CP) $(LIBDIR)/$(DEVNAME) $(INSTALL_LIBDIR)/
+	$(CP) $(LIBDIR)/$(DEVNAMEALT) $(INSTALL_LIBDIR)/
+#	$(INSTALL) $(LIBDIR)/$(DEBUG_LIBNAME) $(INSTALL_LIBDIR)/
+#	$(INSTALL) $(LIBDIR)/$(RELEASE_LIBNAME_STATIC) $(INSTALL_LIBDIR)/
+#	$(INSTALL) $(LIBDIR)/$(DEBUG_LIBNAME_STATIC) $(INSTALL_LIBDIR)/
 	$(MKDIR) $(INSTALL_INCDIR)/dumb
 	$(MKDIR) $(INSTALL_INCDIR)/dumb/internal
-	$(CP) $(INCDIR)/dumb/dumb.h $(INSTALL_INCDIR)/dumb
+	$(INSTALL) $(INCDIR)/dumb/dumb.h $(INSTALL_INCDIR)/dumb
 	$(CP) $(INCDIR)/dumb/internal/blip_buf.h $(INSTALL_INCDIR)/dumb/internal/blip_buf.h
+	$(MKDIR) $(INSTALL_LIBDIR)/pkgconfig/
+	$(CP) libdumb-kataja.pc $(INSTALL_LIBDIR)/pkgconfig/
 	@echo "Install done. Link to libdumb or libdumbd to get release or debug version. Main header file is dumb/dumb.h."

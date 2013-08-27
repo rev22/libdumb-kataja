@@ -1,0 +1,10 @@
+prefix=/usr
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: libdumb-kataja0
+Description: A little bit customized version of libdumb
+Version: 0.9.3
+Cflags: -I${includedir}
+Libs: -L${exec_prefix}/lib -ldumb-kataja

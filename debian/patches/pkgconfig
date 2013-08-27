@@ -1,0 +1,32 @@
+Description: add a .pc file for pkg-config
+ libdumb-kataja (0.9.3-1) unstable; urgency=low
+ .
+   * Initial release.
+Author: Michele Bini <michele.bini@gmail.com>
+
+---
+The information above should follow the Patch Tagging Guidelines, please
+checkout http://dep.debian.net/deps/dep3/ to learn about the format. Here
+are templates for supplementary fields that you might want to add:
+
+Origin: <vendor|upstream|other>, <url of original patch>
+Bug: <url in upstream bugtracker>
+Bug-Debian: http://bugs.debian.org/<bugnumber>
+Bug-Ubuntu: https://launchpad.net/bugs/<bugnumber>
+Forwarded: <no|not-needed|url proving that it has been forwarded>
+Reviewed-By: <name and email of someone who approved the patch>
+Last-Update: <YYYY-MM-DD>
+
+--- /dev/null
++++ libdumb-kataja-0.9.3/libdumb-kataja.pc
+@@ -0,0 +1,10 @@
++prefix=/usr
++exec_prefix=${prefix}
++libdir=${exec_prefix}/lib
++includedir=${prefix}/include
++
++Name: libdumb-kataja0
++Description: A little bit customized version of libdumb
++Version: 0.9.3
++Cflags: -I${includedir}
++Libs: -L${exec_prefix}/lib -ldumb-kataja
